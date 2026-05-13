@@ -1,0 +1,1 @@
+Setup inicial: Docker con Sail falló por reglas de red residuales de ZeroTier. Solución: reiniciar Ubuntu. También hubo conflicto de puertos 80 y 3306 con servicios locales, se resolvió mapeando a 8080 y 3307.
