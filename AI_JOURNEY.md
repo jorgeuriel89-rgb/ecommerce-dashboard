@@ -104,3 +104,28 @@ Como mejora adicional al requerimiento de OAuth, se implementó login con Google
 además de GitHub. Al tener Socialite ya instalado y configurado, el proceso fue
 directo — misma arquitectura, diferente driver. Esto demuestra la extensibilidad
 del diseño.
+
+### Seeder con emails duplicados
+Durante la validación del proyecto clonando desde cero, el seeder fallaba con un error
+de constraint único en el email de clientes. El problema era que el `PedidoFactory`
+creaba un cliente nuevo por cada pedido, y Faker eventualmente generaba emails repetidos
+a escala de 1,000 registros.
+
+Se refactorizó el `DatabaseSeeder` para crear primero 100 clientes y luego asignarlos
+aleatoriamente a los pedidos usando `$clientes->random()->id`, eliminando completamente
+la posibilidad de duplicados.
+
+### Docker fuera del directorio home
+Al intentar clonar el repositorio directamente en `~` y correr los comandos de Sail,
+Docker lanzaba un error de namespace: "current working directory is outside of container
+mount namespace root". El contenedor no podía acceder al directorio.
+
+Se identificó que Docker requiere que el proyecto esté en una subcarpeta, no directamente
+en el home. Se actualizó el README para indicar que se clone en `~/Projects` o cualquier
+subdirectorio.
+
+### Validación del orden de instalación
+Al simular el proceso de instalación como lo haría el evaluador, se detectó que el README
+tenía `key:generate` antes de `sail up -d`, lo cual falla porque Sail no está corriendo.
+Se corrigió el orden y se agregó una nota para esperar 20 segundos antes de correr
+`migrate --seed`, ya que MySQL necesita tiempo para inicializarse completamente.
