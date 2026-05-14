@@ -59,6 +59,11 @@ composer install
 ./vendor/bin/sail artisan key:generate
 ```
 
+> **Si el comando se cuelga**, usa esta alternativa:
+> ```bash
+> docker exec $(docker ps --filter "name=laravel.test" --format "{{.Names}}") php artisan key:generate
+> ```
+
 ### 6. Correr migraciones y seeders
 > **Nota:** Espera 20 segundos después de `sail up -d` antes de correr este comando para que MySQL termine de inicializarse.
 

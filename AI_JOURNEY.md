@@ -129,3 +129,26 @@ Al simular el proceso de instalación como lo haría el evaluador, se detectó q
 tenía `key:generate` antes de `sail up -d`, lo cual falla porque Sail no está corriendo.
 Se corrigió el orden y se agregó una nota para esperar 20 segundos antes de correr
 `migrate --seed`, ya que MySQL necesita tiempo para inicializarse completamente.
+
+### Segunda refactorización del Seeder — loop directo
+Durante una segunda ronda de validación clonando desde cero, el seeder seguía fallando
+con emails duplicados de forma intermitente. Se identificó que usar `factory()->make()`
+dentro del loop no garantizaba unicidad completa.
+
+Se refactorizó a un loop directo con `Pedido::create()` asignando los campos manualmente
+y tomando clientes existentes con `$clientes->random()`. Esto elimina completamente
+cualquier dependencia del factory dentro del loop y garantiza que nunca se crean
+clientes nuevos durante la creación de pedidos.
+
+### migrate:fresh --seed en lugar de migrate --seed
+Durante la validación se detectó que si el evaluador corría `migrate --seed` dos veces,
+los datos se duplicaban (2,000 pedidos, 200 clientes, 40 productos). Se cambió el comando
+a `migrate:fresh --seed` que elimina y recrea todas las tablas antes de sembrar,
+garantizando siempre datos limpios sin importar cuántas veces se ejecute.
+
+### Sail artisan se cuelga en ciertas rutas
+Se detectó que `./vendor/bin/sail artisan key:generate` se congela indefinidamente
+cuando el proyecto está en ciertas rutas del sistema. Se agregó una alternativa en
+el README usando `docker exec` directamente sobre el contenedor, que funciona
+independientemente de la ruta:
+`docker exec $(docker ps --filter "name=laravel.test" --format "{{.Names}}") php artisan key:generate`
