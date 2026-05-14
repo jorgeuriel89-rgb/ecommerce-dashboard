@@ -25,9 +25,11 @@ class Pedido extends Model
     public function scopePorEnviar($query)
     {
         return $query->where('estado', 'pendiente')
-                     ->whereBetween('fecha_entrega', [now(), now()->addDays(3)]);
+                    ->whereBetween('fecha_entrega', [
+                        now()->startOfDay(),
+                        now()->addDays(3)->endOfDay()
+                    ]);
     }
-
     public function scopeRetrasados($query)
     {
         return $query->where('estado', 'pendiente')
