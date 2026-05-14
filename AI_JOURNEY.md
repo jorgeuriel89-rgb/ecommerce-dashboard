@@ -2,7 +2,7 @@
 ## Experiencia como Tech Lead de la IA
 
 ### Detalles
-Este proyecto fue desarrollado con apoyo de Claude (Anthropic) como asistente de IA.
+Este proyecto fue desarrollado con apoyo de Claude de Anthropic como asistente de IA.
 Usé la IA como guía técnica y acelerador de desarrollo, para validar requerimientos y 
 para resolver los problemas que surgieron en el desarrollo.
 
@@ -40,15 +40,15 @@ un segmento de red diferente. Los contenedores no podían resolver DNS y por lo 
 no podían descargar nada.
 
 Después de varios intentos para resolverlo la solución final fue reiniciar Ubuntu para limpiar las reglas de red de ZeroTier.
-Una vez limpio, Docker tuvo acceso a internet sin problema y pude continuar con el desarrollo.
+Vlidando despues de eso, Docker tuvo acceso a internet sin problema y pude continuar con el desarrollo.
 
 ### Comando Artisan — optimización del update
 La primera versión del comando usaba un loop con save() individual por cada pedido.
 
-Se  refactorizó a un update masivo con DB::raw que ejecuta una sola query en la BD
+Se  refactorizó a un update masivo que ejecuta una sola query en la BD
 
 ### Login con OAuth
-Se configuró Socialite la entrada al sistema sea GitHub y Google,
+Se configuró Socialite para que la entrada al sistema sea GitHub y Google,
 sin formulario de registro. Las rutas del dashboard se protegieron con
 el middleware auth para que nadie pueda acceder sin autenticarse.
 
@@ -62,8 +62,8 @@ siguiendo las notas técnicas del proyecto.
 
 
 ### Timezone incorrecto en el apartado "Por Enviar"
-Se mostraba fechas incorrectas porque Laravel corría en UTC mientras el servidor
-está en Ciudad de México. El rango de próximos 3 días se corría un día completo y daba un día demás.
+Se mostraba fechas incorrectas porque Laravel corría en UTC mientras el servidor en la zona horaria 
+debería ser Ciudad de México. El rango de próximos 3 días se corría un día completo y daba un día demás.
 Se resolvió configurando el timezone.
 
 ### Redirección de rutas protegidas
@@ -76,7 +76,7 @@ además del primero que puse que fue el de GitHub.
 
 ### Seeder con emails duplicados
 Durante la validación del proyecto clonando desde cero, el seeder fallaba con un error
-de constraint único en el email de clientes. El problema era que el PedidoFactory
+de constraint en el email de clientes. El problema era que el PedidoFactory
 creaba un cliente nuevo por cada pedido y Faker eventualmente generaba emails repetidos.
 
 Se refactorizó el DatabaseSeeder, eliminando la posibilidad de duplicados.
