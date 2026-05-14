@@ -63,7 +63,7 @@ composer install
 > **Nota:** Espera 20 segundos después de `sail up -d` antes de correr este comando para que MySQL termine de inicializarse.
 
 ```bash
-./vendor/bin/sail artisan migrate --seed
+./vendor/bin/sail artisan migrate:fresh --seed
 ```
 
 ### 7. Compilar assets
