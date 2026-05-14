@@ -7,7 +7,7 @@ Panel interno de logística con autenticación OAuth y procesamiento automatizad
 - MySQL 8.4
 - Docker (Laravel Sail)
 - Blade + Tailwind CSS
-- Laravel Socialite (OAuth GitHub)
+- Laravel Socialite (OAuth GitHub y Google)
 
 ## Requisitos
 - Docker Desktop o Docker Engine
