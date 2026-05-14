@@ -1,10 +1,10 @@
 # AI_JOURNEY.md
 ## Experiencia como Tech Lead de la IA
 
-### Contexto
+### Detalles
 Este proyecto fue desarrollado con apoyo de Claude (Anthropic) como asistente de IA.
-Usé la IA como guía técnica y acelerador de desarrollo, tomando decisiones sobre 
-arquitectura, orden de construcción y cómo resolver los problemas que surgieron en el camino.
+Usé la IA como guía técnica y acelerador de desarrollo, para validar requerimientos y 
+para resolver los problemas que surgieron en el desarrollo.
 
 ## 1. Prompts Clave
 
@@ -15,7 +15,7 @@ Teniendo el documento de los requisitos a desarrollar, le pedí a la IA que me a
 - Establecer puntos de avance diarios para llegar a la fecha de entrega
 - Analizar los requerimientos del proyecto para entender qué había que construir antes de empezar
 
-Esto me permitió entender a detalle los requerimientos para poder cumplirlos adecuadamente
+Pude entender a detalle los requerimientos para poder cumplirlos adecuadamente
 
 ### Migraciones y modelos
 Le pedí que generara las 4 migraciones con sus relaciones correctas, validando
@@ -27,7 +27,7 @@ Le pedí que implementara el controlador y las vistas Blade con Tailwind, con la
 
 ### Comando Artisan
 Le pedí que implementara el motor de cargos exprés con las 3 condiciones mencionadas
-usando Eloquent, y que el filtro se hiciera directamente en SQL sin traer datos a memoria.
+usando Eloquent y que el filtro se hiciera directamente en SQL sin traer datos a memoria.
 
 
 ## 2. Correcciones y validaciones de requerimientos
@@ -35,11 +35,11 @@ usando Eloquent, y que el filtro se hiciera directamente en SQL sin traer datos 
 ### El problema de Docker sin internet
 Inicialmente tuve un problema con que Docker no tenía salida a internet para instalar
 los paquetes dentro del contenedor. El problema era que tenía ZeroTier 
-instalado en Linux, y sus reglas de red creaban un conflicto con Docker al usar
+instalado en Linux y sus reglas de red creaban un conflicto con Docker al usar
 un segmento de red diferente. Los contenedores no podían resolver DNS y por lo tanto
 no podían descargar nada.
 
-Después de varios intentos para resolverlo la solución final fue reiniciar Ubuntu para limpiar las reglas de red residuales de ZeroTier.
+Después de varios intentos para resolverlo la solución final fue reiniciar Ubuntu para limpiar las reglas de red de ZeroTier.
 Una vez limpio, Docker tuvo acceso a internet sin problema y pude continuar con el desarrollo.
 
 ### Comando Artisan — optimización del update
