@@ -79,7 +79,9 @@ Durante la validación del proyecto clonando desde cero, el seeder fallaba con u
 de constraint en el email de clientes. El problema era que el PedidoFactory
 creaba un cliente nuevo por cada pedido y Faker eventualmente generaba emails repetidos.
 
-Se refactorizó el DatabaseSeeder, eliminando la posibilidad de duplicados.
+Se refactorizó a un loop directo con Pedido::create() asignando los campos manualmente
+y tomando clientes existentes con $clientes->random(). Eliminando dependencia del factory dentro 
+del loop y garantizando que nunca se crean clientes nuevos durante la creación de pedidos.
 
 ### Docker fuera deen el directorio home
 Al intentar clonar el repositorio directamente en el home y correr los comandos de Sail,
