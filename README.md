@@ -64,9 +64,8 @@ composer install
 ### 5. Compilar assets
 ```bash
 ./vendor/bin/sail npm install
-./vendor/bin/sail npm run dev
+./vendor/bin/sail npm run build
 ```
-
 ### 6. Acceder al sistema
 Abre [http://localhost:8080](http://localhost:8080) e inicia sesión con GitHub o Google.
 
