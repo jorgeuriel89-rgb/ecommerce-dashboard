@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
+})->name('login');
 // Rutas de autenticación
 Route::get('/auth/github', [SocialiteController::class, 'redirectToGithub'])->name('auth.github');
 Route::get('/auth/github/callback', [SocialiteController::class, 'handleGithubCallback']);
