@@ -17,14 +17,14 @@ Panel interno de logística con autenticación OAuth y procesamiento automatizad
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/jorgeuriel89-rgb/ecommerce-dashboard.git
-cd ecommerce-dashboard
+mkdir -p ~/Projects
+git clone https://github.com/jorgeuriel89-rgb/ecommerce-dashboard.git ~/Projects/ecommerce-dashboard
+cd ~/Projects/ecommerce-dashboard
 ```
 
 ### 2. Configurar el entorno
 ```bash
 cp .env.example .env
-./vendor/bin/sail artisan key:generate
 ```
 
 Edita el `.env` y agrega tus credenciales de OAuth:
@@ -42,31 +42,35 @@ GITHUB_CLIENT_ID=tu_client_id
 GITHUB_CLIENT_SECRET=tu_client_secret
 GOOGLE_CLIENT_ID=tu_client_id
 GOOGLE_CLIENT_SECRET=tu_client_secret
-APP_PORT=8080
-FORWARD_DB_PORT=3307
-DB_HOST=mysql
-DB_DATABASE=pedidos_db
-DB_USERNAME=sail
-DB_PASSWORD=password
 ```
 
 ### 3. Instalar dependencias
 ```bash
 composer install
+```
+
+### 4. Levantar los contenedores
+```bash
 ./vendor/bin/sail up -d
 ```
 
-### 4. Correr migraciones y seeders
+### 5. Generar clave de aplicación
+```bash
+./vendor/bin/sail artisan key:generate
+```
+
+### 6. Correr migraciones y seeders
 ```bash
 ./vendor/bin/sail artisan migrate --seed
 ```
 
-### 5. Compilar assets
+### 7. Compilar assets
 ```bash
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run build
 ```
-### 6. Acceder al sistema
+
+### 8. Acceder al sistema
 Abre [http://localhost:8080](http://localhost:8080) e inicia sesión con GitHub o Google.
 
 ---
