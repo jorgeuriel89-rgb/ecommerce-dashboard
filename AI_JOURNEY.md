@@ -85,3 +85,22 @@ Pedido::retrasados()->with(['cliente', 'productos'])->paginate(15);
 ```
 
 En lugar de escribir el filtro completo cada vez en el controlador.
+
+
+### Timezone incorrecto en el scope "Por Enviar"
+El scope mostraba fechas incorrectas porque Laravel corría en UTC mientras el servidor
+está en Ciudad de México. El rango de "próximos 3 días" se corría un día completo.
+Se resolvió configurando el timezone en `config/app.php`:
+`'timezone' => 'America/Mexico_City'`
+
+### Redirección de rutas protegidas
+Al validar que usuarios sin sesión no pudieran acceder al dashboard, descubrimos que
+Laravel 11 busca por defecto una ruta llamada `login` para redirigir. Como no usamos
+el sistema de autenticación tradicional sino OAuth, se resolvió nombrando la ruta
+principal como `login` en `routes/web.php`.
+
+### Login con Google — plus adicional
+Como mejora adicional al requerimiento de OAuth, se implementó login con Google
+además de GitHub. Al tener Socialite ya instalado y configurado, el proceso fue
+directo — misma arquitectura, diferente driver. Esto demuestra la extensibilidad
+del diseño.

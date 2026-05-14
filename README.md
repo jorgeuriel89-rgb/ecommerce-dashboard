@@ -24,13 +24,24 @@ cd ecommerce-dashboard
 ### 2. Configurar el entorno
 ```bash
 cp .env.example .env
+./vendor/bin/sail artisan key:generate
 ```
 
-Edita el `.env` y agrega tus credenciales de GitHub OAuth:
+Edita el `.env` y agrega tus credenciales de OAuth:
+
+**GitHub:** Crea una OAuth App en https://github.com/settings/developers
+- Homepage URL: `http://localhost:8080`
+- Callback URL: `http://localhost:8080/auth/github/callback`
+
+**Google:** Crea credenciales en https://console.cloud.google.com
+- URI de redirección: `http://localhost:8080/auth/google/callback`
+
+Luego llena estas variables en el `.env`:
 ```env
 GITHUB_CLIENT_ID=tu_client_id
 GITHUB_CLIENT_SECRET=tu_client_secret
-GITHUB_REDIRECT_URI=http://localhost:8080/auth/github/callback
+GOOGLE_CLIENT_ID=tu_client_id
+GOOGLE_CLIENT_SECRET=tu_client_secret
 APP_PORT=8080
 FORWARD_DB_PORT=3307
 DB_HOST=mysql
@@ -45,24 +56,19 @@ composer install
 ./vendor/bin/sail up -d
 ```
 
-### 4. Generar clave de aplicación
-```bash
-./vendor/bin/sail artisan key:generate
-```
-
-### 5. Correr migraciones y seeders
+### 4. Correr migraciones y seeders
 ```bash
 ./vendor/bin/sail artisan migrate --seed
 ```
 
-### 6. Compilar assets
+### 5. Compilar assets
 ```bash
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run dev
 ```
 
-### 7. Acceder al sistema
-Abre [http://localhost:8080](http://localhost:8080) e inicia sesión con GitHub.
+### 6. Acceder al sistema
+Abre [http://localhost:8080](http://localhost:8080) e inicia sesión con GitHub o Google.
 
 ---
 
