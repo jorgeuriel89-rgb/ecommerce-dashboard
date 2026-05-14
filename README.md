@@ -3,7 +3,7 @@
 Panel interno de logística con autenticación OAuth y procesamiento automatizado de pedidos.
 
 ## Tecnologías
-- Laravel 12
+- Laravel 13
 - MySQL 8.4
 - Docker (Laravel Sail)
 - Blade + Tailwind CSS
