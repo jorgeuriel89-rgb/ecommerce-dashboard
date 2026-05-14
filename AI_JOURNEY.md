@@ -21,12 +21,12 @@ Antes de escribir una sola línea de código, le pedí a la IA que me ayudara a:
 Esto me permitió entender a detalle los requerimientos para poder cumplirlos adecuadamente
 
 ### Migraciones y modelos
-Le pedí que generara las 4 migraciones con sus relaciones correctas, especialmente
+Le pedí que generara las 4 migraciones con sus relaciones correctas, validando
 la tabla pivote `pedido_producto` para la relación muchos a muchos entre pedidos y productos.
 
 ### Dashboard
 Le pedí que implementara el controlador y las vistas Blade con Tailwind, con las
-4 categorías exactas del negocio y paginación real de base de datos.
+4 categorías y paginación de base de datos.
 
 ### Comando Artisan
 Le pedí que implementara el motor de cargos exprés con las 3 condiciones exactas
@@ -67,7 +67,7 @@ Pedido::whereIn('id', $ids)->update([
 ```
 
 ### Login con OAuth
-Configuré Socialite para que el único punto de entrada al sistema sea GitHub,
+Configuré Socialite para que el único punto de entrada al sistema sea GitHub y Google,
 sin formulario de registro manual. Las rutas del dashboard están protegidas con
 el middleware `auth` para que nadie pueda acceder sin autenticarse.
 
@@ -95,15 +95,14 @@ Se resolvió configurando el timezone en `config/app.php`:
 
 ### Redirección de rutas protegidas
 Al validar que usuarios sin sesión no pudieran acceder al dashboard, descubrimos que
-Laravel 11 busca por defecto una ruta llamada `login` para redirigir. Como no usamos
+Laravel busca por defecto una ruta llamada `login` para redirigir. Como no usamos
 el sistema de autenticación tradicional sino OAuth, se resolvió nombrando la ruta
 principal como `login` en `routes/web.php`.
 
 ### Login con Google — plus adicional
 Como mejora adicional al requerimiento de OAuth, se implementó login con Google
 además de GitHub. Al tener Socialite ya instalado y configurado, el proceso fue
-directo — misma arquitectura, diferente driver. Esto demuestra la extensibilidad
-del diseño.
+directo — misma arquitectura, diferente driver.
 
 ### Seeder con emails duplicados
 Durante la validación del proyecto clonando desde cero, el seeder fallaba con un error
