@@ -36,4 +36,26 @@ class SocialiteController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    public function redirectToGoogle()
+{
+    return Socialite::driver('google')->redirect();
+}
+
+public function handleGoogleCallback()
+{
+    $googleUser = Socialite::driver('google')->user();
+
+    $user = User::updateOrCreate(
+        ['email' => $googleUser->getEmail()],
+        [
+            'name' => $googleUser->getName(),
+            'password' => bcrypt(\Illuminate\Support\Str::random(24)),
+        ]
+    );
+
+    Auth::login($user);
+
+    return redirect('/dashboard');
+}
 }

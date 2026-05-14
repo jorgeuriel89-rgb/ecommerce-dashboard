@@ -13,12 +13,12 @@ arquitectura, orden de construcción y cómo resolver los problemas que surgiero
 
 ### Arranque del proyecto
 Antes de escribir una sola línea de código, le pedí a la IA que me ayudara a:
-- Estimar el tiempo de desarrollo realista dado que era mi primer proyecto en Laravel y Docker
+- Estimar el tiempo de desarrollo
 - Definir todos los requisitos de instalación en orden
 - Establecer puntos de avance diarios para llegar a la fecha de entrega
 - Analizar los requerimientos del proyecto para entender qué había que construir antes de empezar
 
-Esto me permitió tener una visión clara del proyecto completo antes de tocar la terminal.
+Esto me permitió entender a detalle los requerimientos para poder cumplirlos adecuadamente
 
 ### Migraciones y modelos
 Le pedí que generara las 4 migraciones con sus relaciones correctas, especialmente
@@ -65,9 +65,6 @@ Pedido::whereIn('id', $ids)->update([
     'total' => DB::raw('total * 1.10')
 ]);
 ```
-
-Esto es crítico a escala — si hay 10,000 pedidos, la primera versión hace 10,000
-queries y la segunda hace 1.
 
 ### Login con OAuth
 Configuré Socialite para que el único punto de entrada al sistema sea GitHub,
